@@ -22,4 +22,9 @@ export class TodosComponent {
       console.log("item", this.list);
   }
 
+  removeTask(id:number){
+      this.list = this.list.filter(item => item.id !== id);
+      console.log(this.list);
+  }
+
 }
