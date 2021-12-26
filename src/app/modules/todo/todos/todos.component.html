@@ -2,12 +2,24 @@
     <input type="text" placeholder="Enter new Task" #task/>
     <br>
     <br>
-    <button (click)="addTask(task.value)">Add new Task</button>
+    <button 
+        class = "py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700"
+        (click)="addTask(task.value)"
+    >
+        Add new Task
+    </button>
     <br>
     <br>
-    <ul *ngFor="let item of list">
+    <ul 
+        *ngFor="let item of list"
+    >
         <li>
             {{item.name}}
-            <button (click)="removeTask(item.id)">Remove</button>
+            <button 
+                class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700" 
+                (click)="removeTask(item.id)"
+            >
+                Remove
+            </button>
         </li>
     </ul>
