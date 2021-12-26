@@ -2,16 +2,26 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 // Angular moudle
-import { AppComponent } from './app.component';
-import { TodoModule } from './todo/todo.module';
+import { LoginModule } from './modules/login/login.module';
+import { MovieModule } from './modules/movie/movie.module';
+import { TodoModule } from './modules/todo/todo.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { MainComponent } from './components/main/main.component';
+import { AppRoutingModule } from './modules/routing.module';
+import { AppComponent } from './components/app/app.component';
 
 @NgModule({
   declarations: [
+    MainComponent,
+    NotFoundComponent,
     AppComponent,
   ],
   imports: [
     BrowserModule,
-    TodoModule
+    LoginModule,
+    MovieModule,
+    TodoModule,
+    AppRoutingModule
   ],
   exports: [
     AppComponent
@@ -20,5 +30,5 @@ import { TodoModule } from './todo/todo.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-    
+
 }

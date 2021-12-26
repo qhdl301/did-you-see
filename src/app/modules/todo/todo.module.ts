@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodosComponent } from './todos/todos.component';
+import {TodoRoutingModule} from './routing.module'
 
 
 
@@ -10,7 +11,8 @@ import { TodosComponent } from './todos/todos.component';
     TodosComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TodoRoutingModule
   ],
   exports: [
     TodosComponent
