@@ -9,7 +9,7 @@ import { LoginRoutingModule } from './routing.module'
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule
+    LoginRoutingModule,
   ]
 })
 export class LoginModule { }

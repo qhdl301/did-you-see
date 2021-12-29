@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'; // 라우터 관련 심볼을 로드합니다.
-import { MainComponent } from '../components/main/main.component';
-import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { MainComponent } from './movie/main/main.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
