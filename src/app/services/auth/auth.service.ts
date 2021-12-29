@@ -9,12 +9,10 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 })
 
 export class AuthService {
-  auth = firebase.auth;
-  
   constructor(private afAuth : AngularFireAuth){ }
 
-  async googleLogin() {
-    const provider = new this.auth.GoogleAuthProvider();
+  async googleLogin() : Promise<firebase.auth.UserCredential>{
+    const provider = new firebase.auth.GoogleAuthProvider();
     return await this.afAuth.signInWithPopup(provider);
   }
 }

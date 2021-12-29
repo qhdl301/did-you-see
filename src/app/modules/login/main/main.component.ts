@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import firebase from 'firebase/compat/app';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
@@ -8,14 +9,31 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-
-  auth = firebase.auth;
-  
-  constructor(private afAuth : AngularFireAuth){ }
+  constructor(
+    private authService: AuthService,
+    private afAuth : AngularFireAuth,
+    private router: Router  
+  ){
+    this.afAuth.onAuthStateChanged((user)=>{
+      if (user) {
+        this.router.navigate(['main']);
+      } else {
+        this.router.navigate(['login']);
+      }
+    })
+  }
 
   async googleLogin() {
-    const provider = new this.auth.GoogleAuthProvider();
-    return await this.afAuth.signInWithPopup(provider);
+    this.authService.googleLogin()
+    .then((user) => {
+      this.goMain();
+    }).catch(err => {
+      console.log(err);
+      alert('로그인 실패');
+    })
   }
-  
+  goMain() : void {
+    this.router.navigate(['main']);
+  }
+
 }

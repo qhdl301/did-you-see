@@ -1,27 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-
-// firebase 
-import firebase from 'firebase/compat/app';
-import {Router} from "@angular/router"
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
+import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  isAuth : boolean = false;
 
-  constructor(private router: Router) { 
-    AngularFireModule.initializeApp(environment.firebase);
-  }
-
-  ngOnInit()  {
-    const user = firebase.auth().currentUser;
-    if(!user) {
-      this.router.navigate(['/login']);
-    }
-  }
-
+  constructor() { }
 }
