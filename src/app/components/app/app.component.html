@@ -1,2 +1,7 @@
-<router-outlet></router-outlet>
- 
+<div *ngIf="isAuthChecking;then content else other_content">here is ignored</div>
+<ng-template #content>
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template #other_content>
+    <app-progress-bar></app-progress-bar>
+</ng-template>

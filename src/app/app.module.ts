@@ -10,6 +10,7 @@ import { AppRoutingModule } from './modules/routing.module';
 import { AppComponent } from './components/app/app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { ModulesModule } from './modules/modules.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { environment } from 'src/environments/environment';
     MovieModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    ModulesModule,
   ],
   exports: [
     AppComponent
