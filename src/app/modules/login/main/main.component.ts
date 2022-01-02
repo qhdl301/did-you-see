@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'main',
@@ -11,17 +10,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class MainComponent {
   constructor(
     private authService: AuthService,
-    private afAuth : AngularFireAuth,
     private router: Router  
-  ){
-    this.afAuth.onAuthStateChanged((user)=>{
-      if (user) {
-        this.router.navigate(['main']);
-      } else {
-        this.router.navigate(['login']);
-      }
-    })
-  }
+  ){ }
 
   async googleLogin() {
     this.authService.googleLogin()
