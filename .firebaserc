@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "mamu-96d9e": {
+      "hosting": {
+        "todo-list": [
+          "mamu-96d9e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "mamu-96d9e"
+  }
+}

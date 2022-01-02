@@ -1,17 +1,19 @@
 module.exports = {
-  content: ["./src/**/*.{html,js,ts}"],
+  prefix: '',
+  purge: {
+    content : [
+      './src/**/*.{html,ts,tsx}',
+    ]
+  },
   darkMode: false,
   theme: {
     extend: {
-      colors: {
-        primary: '#8ffebf',
-      },  
     },
   },
   variants: {
     extend: {
-      borderWidth: ['hover'],
     },
   },
-  plugins: [],
+  plugins: [
+  ],
 }
