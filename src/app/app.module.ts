@@ -5,16 +5,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginModule } from './modules/login/login.module';
 import { MovieModule } from './modules/movie/movie.module';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
-import { MainComponent } from './modules/main/main.component';
 import { AppRoutingModule } from './modules/routing.module';
 import { AppComponent } from './components/app/app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { ModulesModule } from './modules/modules.module';
+import { MainModule } from './modules/main/layout.module';
 
 @NgModule({
   declarations: [
-    MainComponent,
     NotFoundComponent,
     AppComponent,
   ],
@@ -22,6 +21,7 @@ import { ModulesModule } from './modules/modules.module';
     BrowserModule,
     LoginModule,
     MovieModule,
+    MainModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     ModulesModule,

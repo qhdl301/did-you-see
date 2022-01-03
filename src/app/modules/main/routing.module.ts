@@ -1,14 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'; // 라우터 관련 심볼을 로드합니다.
-import { LoginModule } from './login/login.module';
-import { MainModule } from './main/layout.module';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-  {path: '', redirectTo:'login', pathMatch: 'full'},
-  {path: 'login', component: LoginModule},
-  {path: 'main', component: MainModule},
-  {path: '**', component: NotFoundComponent}
+  {path: 'main', component: LayoutComponent}
 ]; // 라우팅 규칙은 이 배열에 등록합니다.
 
 // NgModule의 imports, exports 배열에 RouterModule을 등록합니다.
@@ -16,4 +11,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class MainRoutingModule { }
