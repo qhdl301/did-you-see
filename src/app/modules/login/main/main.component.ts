@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { GoogleLoginService } from 'src/app/services/googleLogin/googleLogin.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 })
 export class MainComponent {
   constructor(
-    private authService: AuthService,
+    private googleLoginService: GoogleLoginService,
     private router: Router  
   ){ }
 
-  async googleLogin() {
-    this.authService.googleLogin()
+  googleLogin() {
+    this.googleLoginService.fnGoogleLogin()
     .then((user) => {
       this.goMain();
     }).catch(err => {

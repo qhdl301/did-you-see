@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './main/main.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailComponent } from './detail/detail.component';
 import { MovieRoutingModule } from './routing.module';
 
 @NgModule({
   declarations: [
-    MainComponent,
+    DashboardComponent,
     DetailComponent
   ],
   imports: [
