@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { HttpfetcherService }from 'src/app/services/httpfetcher/httpfetcher.service';
 import { BoxOfficeListMock }from 'src/app/services/mocks/dailyBoxOfficeList';
 
-export type DailyBoxOfficeProps = {  
+export type DailyBoxOfficeRequestType = {  
+  month : string,
+  type : string,
+}
+
+export type DailyBoxOfficeResponseType = {  
     movieCd: string,
     imgUrl : string,
     title : string,
@@ -14,8 +20,10 @@ export type DailyBoxOfficeProps = {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  dailyBoxOfficeList : DailyBoxOfficeResponseType[] = [];
+  constructor(private httpFetcherService : HttpfetcherService) {this.getDailyBoxOfficeList('',{month : '', type : ''}) }
 
-  constructor() { }
-
-  dailyBoxOfficeList : DailyBoxOfficeProps[] = BoxOfficeListMock;
+  async getDailyBoxOfficeList(url : string, params : DailyBoxOfficeRequestType) {
+    this.dailyBoxOfficeList = await this.httpFetcherService.httpFetcher(url, params, BoxOfficeListMock);
+  }
 }
