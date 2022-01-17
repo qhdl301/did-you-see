@@ -25,9 +25,7 @@ export class DetailComponent implements OnInit {
     }
     boxOfficeItem : DailyBoxOfficeResponseType | undefined = {
       movieCd: '',
-      imgUrl: '',
-      title: '',
-      type: []
+      movieNm: ''
     }
 
     constructor(
