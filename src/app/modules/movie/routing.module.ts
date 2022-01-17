@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'dashboard/:id', component: DetailComponent},
+  {path: 'detail/:movieCd', component: DetailComponent},
 ]; // 라우팅 규칙은 이 배열에 등록합니다.
 
 // NgModule의 imports, exports 배열에 RouterModule을 등록합니다.

@@ -12,6 +12,9 @@ import { MovieRoutingModule } from './routing.module';
   imports: [
     CommonModule,
     MovieRoutingModule
+  ],
+  providers: [
+    DashboardComponent
   ]
 })
 export class MovieModule { }

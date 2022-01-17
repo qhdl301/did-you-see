@@ -1,1 +1,15 @@
-<p>movie detail works!</p>
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg p-6">
+            <div class="flex items-center space-x-6 mb-4">
+                <img class="h-28 w-28 object-cover object-center rounded-full" src={{boxOfficeItem?.imgUrl}} alt="movie image">
+                <div>
+                    <p class="text-xl text-gray-700 font-normal mb-1">{{boxOfficeItem?.title}}</p>
+                </div>
+            </div>
+            <div>
+                <p class="text-gray-400 leading-loose font-normal text-base">{{boxOfficeDescription.description}}</p>
+            </div>
+        </div>
+    </div>
+</section>
