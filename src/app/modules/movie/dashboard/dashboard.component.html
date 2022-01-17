@@ -7,9 +7,9 @@
             </div>
         </div>
         <div class="flex flex-row overflow-x-auto">
-            <div *ngFor="let dailyBoxOfficeItem of dailyBoxOfficeList" class="flex flex-row m-1 w-1/4">
-                <a class="flex flex-row">
-                    <img class="block object-cover object-center m-4" [src]=dailyBoxOfficeItem.imgUrl>
+            <div *ngFor="let dailyBoxOfficeItem of dailyBoxOfficeList" class="flex flex-row m-1 w-1/4" >
+                <a routerLink="/detail/{{dailyBoxOfficeItem.movieCd}}" class="flex flex-row">
+                    <img class="block object-cover object-center m-4" src={{dailyBoxOfficeItem.imgUrl}}>
                 </a>
             </div>
         </div>
