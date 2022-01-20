@@ -10,7 +10,7 @@ import { AppComponent } from './components/app/app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { ModulesModule } from './modules/modules.module';
-import { MainModule } from './modules/main/layout.module';
+import { MainLayoutModule } from './modules/main/layout.module';
 
 @NgModule({
   declarations: [
@@ -19,12 +19,12 @@ import { MainModule } from './modules/main/layout.module';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
     LoginModule,
     MovieModule,
-    MainModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    MainLayoutModule,
     ModulesModule,
+    AppRoutingModule,             // 모듈들을 맨 마지막에 나둬야 함
   ],
   exports: [
     AppComponent
