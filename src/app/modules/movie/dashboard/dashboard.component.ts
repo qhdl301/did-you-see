@@ -1,15 +1,22 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { catchError, fromEvent, map, Observable, of, takeUntil, throwError } from 'rxjs';
-import { HttpfetcherService }from 'src/app/utils/httpfetcher/httpfetcher.utils';
-import { BoxOfficeListMock }from 'src/app/services/mocks/dailyBoxOfficeList';
+import { Component, OnInit } from '@angular/core';
+import { map, take } from 'rxjs';
 import { ApiService } from 'src/app/services/api/api.service';
+import { BoxOfficeListConf } from 'src/app/environment/environment-movie';
 
-export type DailyBoxOfficeRequestType = {  
-  month : string,
-  type : string,
+export type DailyBoxOfficeReqeustType = { 
+  key: string,
+  targetDt: string,
 }
 
-export type DailyBoxOfficeResponseType = {  
+export type DailyBoxOfficeResponseType = { 
+  boxOfficeResult : DailyBoxOfficeListType
+}
+
+export type DailyBoxOfficeListType = { 
+  dailyBoxOfficeList : DailyBoxOfficeItemType
+}
+
+export type DailyBoxOfficeItemType = { 
     movieCd: string,
     movieNm: string,
 }
@@ -20,16 +27,27 @@ export type DailyBoxOfficeResponseType = {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  dailyBoxOfficeList : DailyBoxOfficeResponseType[] = [];
-
-  constructor(private apiService : ApiService) {
-  }
+  dailyBoxOfficeList : Array<DailyBoxOfficeItemType>  = [];
+  constructor(private apiService : ApiService) {}
   
-  ngOnInit(): void { 
-    const CONFIG_URL = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=9430c2c33b50e50ac0a085c9774f6855&targetDt=20120101';  // 나눠주자
-    this.apiService.getData(CONFIG_URL).then(res=>{
-      this.dailyBoxOfficeList = res.boxOfficeResult.dailyBoxOfficeList;
-      console.log("dailyBoxOfficeList",this.dailyBoxOfficeList);
-    })
+  ngOnInit(): void {
+    this.getBoxOfficeList(BoxOfficeListConf.serviceUrl, {key : BoxOfficeListConf.token, targetDt : BoxOfficeListConf.targetDt});
   }
+
+  getBoxOfficeList(url : string, queryParams : DailyBoxOfficeReqeustType) {
+    this.apiService.get<DailyBoxOfficeReqeustType, DailyBoxOfficeResponseType>(url, queryParams)
+      .pipe(
+        take(1),
+        map(response => response.boxOfficeResult.dailyBoxOfficeList),
+      )
+      .subscribe(
+        (response) => {
+          if(response){
+            this.dailyBoxOfficeList = response as unknown as Array<DailyBoxOfficeItemType>;
+          }
+        }
+      )
+  }
+
+  
 }

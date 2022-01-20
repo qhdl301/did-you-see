@@ -1,16 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { filter, map } from 'rxjs';
-import { BoxOfficeDetailMock } from 'src/app/services/mocks/dailyBoxOfficeDetail';
-import { HttpfetcherService } from 'src/app/utils/httpfetcher/httpfetcher.utils';
-import { DailyBoxOfficeResponseType, DashboardComponent } from '../dashboard/dashboard.component';
+import { map, take, tap } from 'rxjs';
+import { BoxOfficeDetailConf } from 'src/app/environment/environment-movie';
+import { ApiService } from 'src/app/services/api/api.service';
 
 export type MovieDetailRequestType = {  
+  key : string,
   movieCd : string | null,
 }
 
 export type MovieDetailResPonseType = {  
-  description : string
+  movieInfoResult : MovieInfoResPonseType
+}
+
+export type MovieInfoResPonseType = {  
+  movieInfo : MovieInfoItemType
+}
+
+export type MovieInfoItemType = {  
+  movieNm : string,
+  movieNmEn : string,
+  openDt : string,
 }
 
 @Component({
@@ -19,38 +29,36 @@ export type MovieDetailResPonseType = {
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-    movieCd : number | undefined;
-    boxOfficeDescription : MovieDetailResPonseType = {
-      description: ''
-    }
-    boxOfficeItem : DailyBoxOfficeResponseType | undefined = {
-      movieCd: '',
-      movieNm: ''
-    }
+    movieCd : string | null = null;
+    detailData: MovieInfoItemType | undefined;
 
     constructor(
       private route: ActivatedRoute, 
-      private dashBoardItems : DashboardComponent,
-      private httpFetcherService : HttpfetcherService,
+      private apiService : ApiService
     ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params:ParamMap) => {
-      this.movieCd = Number(params.get('movieCd'));
-      this.boxOfficeItem = this.dashBoardItems.dailyBoxOfficeList.find(item => item.movieCd === params.get('movieCd'));
-      this.getDetailData('', params.get('movieCd'));
+    this.route.paramMap
+      .subscribe((params:ParamMap) => {
+        this.movieCd = params.get('movieCd');
     })
+    if(this.getDetailData){
+      this.getDetailData(BoxOfficeDetailConf.serviceUrl, {key : BoxOfficeDetailConf.token, movieCd : this.movieCd});
+    }
   }
 
-  getDetailData(url : string, param : MovieDetailRequestType['movieCd']){
-    const detailObserver$ = this.httpFetcherService.httpFetcher(url,param,BoxOfficeDetailMock);
-    detailObserver$
+  getDetailData(url : string, queryParams : MovieDetailRequestType){
+    this.apiService.get<MovieDetailRequestType, MovieDetailResPonseType>(url,queryParams)
       .pipe(
-        map(res => res),
+        take(1),
+        map(response => response.movieInfoResult.movieInfo),
       )
       .subscribe(
-        res => res,
-        err => console.error('HTTP MovieDetail Error', err.meesage),
+        (response) => {
+          if(response){
+           this.detailData = response as MovieInfoItemType;
+          }
+        }
       )
 
   }

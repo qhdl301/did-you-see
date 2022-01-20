@@ -2,13 +2,13 @@
     <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-white rounded-lg p-6">
             <div class="flex items-center space-x-6 mb-4">
-                <img class="h-28 w-28 object-cover object-center rounded-full" src={{boxOfficeItem?.movieNm}} alt="movie image">
+                <img class="h-28 w-28 object-cover object-center rounded-full" src='' alt={{detailData?.movieNm}}>
                 <div>
-                    <p class="text-xl text-gray-700 font-normal mb-1">{{boxOfficeItem?.movieNm}}</p>
+                    <p class="text-xl text-gray-700 font-normal mb-1">{{detailData?.movieNmEn}}</p>
                 </div>
             </div>
             <div>
-                <p class="text-gray-400 leading-loose font-normal text-base">{{boxOfficeDescription.description}}</p>
+                <p class="text-gray-400 leading-loose font-normal text-base">{{detailData?.openDt}}</p>
             </div>
         </div>
     </div>
